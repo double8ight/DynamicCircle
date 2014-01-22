@@ -7,19 +7,53 @@
 //
 
 #import "ViewController.h"
+#define WIDTH 100
+#define HEIGHT 100
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *circleImage;
+
 
 @end
 
 @implementation ViewController
+{
+    NSMutableArray *circle;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    circle = [[NSMutableArray alloc] init];
+    for(NSInteger i=0; i < 10; i++)
+    {
+        UIImageView *currentImageView = [[UIImageView alloc] initWithFrame:CGRectMake( (arc4random() % (320-WIDTH)),  (arc4random() % (640-HEIGHT)), WIDTH, HEIGHT)];
+        [currentImageView setImage:[UIImage imageNamed:@"circle.png"]];
+        [circle addObject:currentImageView];
+        [self.view addSubview:circle[i]];
+    }
+    
 
+    
+    [UIView animateWithDuration:2.0 animations:^{
+        for(NSInteger i=0; i < 10; i++)
+        {
+            UIImageView *currentImageView;
+            currentImageView = circle[i];
+            currentImageView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+        }
+    }
+        completion:^(BOOL finished){
+                [UIView animateWithDuration:2.0 animations:^{
+                    for(NSInteger i=0; i < 10; i++)
+                    {
+                     UIImageView *currentImageView;
+                     currentImageView = circle[i];
+                     currentImageView.transform = CGAffineTransformMakeScale(1, 1);
+                 }
+        }];
+    }];
     
 }
 
