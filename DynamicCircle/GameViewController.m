@@ -8,11 +8,12 @@
 
 #import "GameViewController.h"
 #import "EndViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define WIDTH 100
 #define HEIGHT 100
 
-@interface GameViewController ()
+@interface GameViewController ()<AVAudioPlayerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *circleCount;
 
 @end
@@ -20,6 +21,8 @@
 @implementation GameViewController
 {
     NSMutableArray *circle;
+    AVAudioPlayer *player;
+    NSTimer *timer;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -47,22 +50,35 @@
         [self.view addSubview:circle[i]];
     }
     
-    
-    // 처음 시작시 원이 역동적으로 움직이는 애니메이션이 동작한다.
-    [UIView animateWithDuration:(float)circle.count / 5 delay:0 options:UIViewAnimationOptionAutoreverse|UIViewAnimationOptionRepeat animations:^{
-        for(NSInteger i=0; i < circle.count; i++)
-        {
-            UIImageView *currentImageView;
-            currentImageView = circle[i];
-            currentImageView.transform = CGAffineTransformMakeScale(0.5, 0.5);
-        }
-        
-    }
-        completion:nil];
-    
-    
     // 원의 개수를 라벨에 표시해준다.
     self.circleCount.text = [NSString stringWithFormat:@"%d", [circle count]];
+    
+    
+    // 배경음악 재생
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"jungle-run" ofType:@"mp3"];
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    player.numberOfLoops = -1; //infinite
+    player.delegate = self;
+    if([player prepareToPlay])
+    {
+        [player play];
+    }
+}
+
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    // 처음 시작시 원이 역동적으로 움직이는 애니메이션이 동작한다.
+    [UIView animateWithDuration:(float)circle.count / 5 delay:0 options:UIViewAnimationOptionAutoreverse|UIViewAnimationOptionRepeat animations:^{
+
+        UIImageView *currentImageView;
+        currentImageView = circle[arc4random() % circle.count];
+        currentImageView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+
+        
+    }
+                     completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,9 +113,15 @@
                 NSLog(@"%d", [circle count]);
                 
                 
-                // 게임 끝날 시
+                // 게임 끝날 시 (Game End)
                 if(circle.count == 0)
                 {
+                    // 음악 중지시키고 다음으로 넘어감
+                    if([player isPlaying])
+                    {
+                        [player stop];
+                    }
+                    
                     UIStoryboard *storyboard = self.storyboard;
                     // 스토리 보드에서 뷰 컨트롤러 얻어오기
                     EndViewController *endVC = [storyboard instantiateViewControllerWithIdentifier:@"endVC"];
