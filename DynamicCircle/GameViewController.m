@@ -10,11 +10,13 @@
 #import "EndViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
-#define WIDTH 100
-#define HEIGHT 100
+#define WIDTH 70 // 원 가로크기
+#define HEIGHT 70 // 원 세로크기
+#define GAME_TIME 20 // 게임 카운트 시간
 
 @interface GameViewController ()<AVAudioPlayerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *circleCount;
+@property (weak, nonatomic) IBOutlet UILabel *timeCount;
 
 @end
 
@@ -23,6 +25,8 @@
     NSMutableArray *circle;
     AVAudioPlayer *player;
     NSTimer *timer;
+    NSTimer *sizeTimer;
+    NSInteger time;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -53,6 +57,11 @@
     // 원의 개수를 라벨에 표시해준다.
     self.circleCount.text = [NSString stringWithFormat:@"%d", [circle count]];
     
+    // 타이머 시작
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTime) userInfo:nil repeats:YES];
+    sizeTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(updateCircle) userInfo:nil repeats:YES];
+    time = GAME_TIME;
+    self.timeCount.text = [NSString stringWithFormat:@"%d",time];
     
     // 배경음악 재생
     NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"jungle-run" ofType:@"mp3"];
@@ -66,20 +75,17 @@
     }
 }
 
-
 -(void)viewDidAppear:(BOOL)animated
 {
-    // 처음 시작시 원이 역동적으로 움직이는 애니메이션이 동작한다.
     [UIView animateWithDuration:(float)circle.count / 5 delay:0 options:UIViewAnimationOptionAutoreverse|UIViewAnimationOptionRepeat animations:^{
-
+        
         UIImageView *currentImageView;
         currentImageView = circle[arc4random() % circle.count];
         currentImageView.transform = CGAffineTransformMakeScale(0.5, 0.5);
-
         
-    }
-                     completion:nil];
+    }     completion:nil];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -116,6 +122,9 @@
                 // 게임 끝날 시 (Game End)
                 if(circle.count == 0)
                 {
+                    // 타이머 삭제
+                    [timer invalidate];
+                    
                     // 음악 중지시키고 다음으로 넘어감
                     if([player isPlaying])
                     {
@@ -126,21 +135,87 @@
                     // 스토리 보드에서 뷰 컨트롤러 얻어오기
                     EndViewController *endVC = [storyboard instantiateViewControllerWithIdentifier:@"endVC"];
                     
+                    // 데이터 넘기기
+                    endVC.circleCount = circle.count;
+                    endVC.gameEndTime = time;
+                    endVC.totalGameTime = GAME_TIME;
+                    
                     // 뷰 컨트롤러 전환
                     [self presentViewController:endVC animated:YES completion:nil];
                     
                     return;
                 }
                 
-                //UIImageView *currentImageView;
-                //currentImageView = circle[arc4random() % circle.count];
-                //currentImageView.transform = CGAffineTransformMakeTranslation((arc4random() % ((int)self.view.frame.size.width - WIDTH*2)),  (arc4random() % ((int)self.view.frame.size.height - HEIGHT*2)));
+                UIImageView *currentImageView;
+                currentImageView = circle[arc4random() % circle.count];
+                currentImageView.frame = CGRectMake( (arc4random() % ((int)self.view.frame.size.width - WIDTH)),  (arc4random() % ((int)self.view.frame.size.height - HEIGHT)) + 35, WIDTH, HEIGHT);
             }
         }
         
         
     }];
     
+}
+
+// 시간 라벨 업데이트
+-(void)updateTime
+{
+    // 게임 끝날 시 (Game End)
+    if (time == 0)
+    {
+        // 타이머 삭제
+        [timer invalidate];
+        
+        
+        // 음악 중지시키고 다음으로 넘어감
+        if([player isPlaying])
+        {
+            [player stop];
+        }
+        
+        UIStoryboard *storyboard = self.storyboard;
+        // 스토리 보드에서 뷰 컨트롤러 얻어오기
+        EndViewController *endVC = [storyboard instantiateViewControllerWithIdentifier:@"endVC"];
+        
+        // 데이터 넘기기
+        endVC.circleCount = circle.count;
+        endVC.gameEndTime = time;
+        endVC.totalGameTime = GAME_TIME;
+        
+        // 뷰 컨트롤러 전환
+        [self presentViewController:endVC animated:YES completion:nil];
+        
+        return;
+    }
+    else
+    {
+        time = time - 1;
+        self.timeCount.text = [NSString stringWithFormat:@"%d",time];
+        
+        if(time % 2 == 0)
+        {
+            UIImageView *currentImageView = [[UIImageView alloc] initWithFrame:CGRectMake( (arc4random() % ((int)self.view.frame.size.width - WIDTH)),  (arc4random() % ((int)self.view.frame.size.height - HEIGHT)) + 35, WIDTH, HEIGHT)];
+            [currentImageView setImage:[UIImage imageNamed:@"circle.png"]];
+            [circle addObject:currentImageView];
+            [self.view addSubview:currentImageView];
+            self.circleCount.text = [NSString stringWithFormat:@"%d", [circle count]];
+        }
+    }
+}
+
+-(void)updateCircle
+{
+    if(circle.count == 0)
+        return;
+    
+    
+    [UIView animateWithDuration:(float)circle.count / 5 delay:0 options:UIViewAnimationOptionAutoreverse|UIViewAnimationOptionRepeat animations:^{
+        
+        UIImageView *currentImageView;
+        currentImageView = circle[arc4random() % circle.count];
+        currentImageView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+        
+    }     completion:nil];
 }
 
 @end

@@ -11,5 +11,7 @@
 @interface EndViewController : UIViewController
 
 @property int gameEndTime;
+@property int circleCount;
+@property int totalGameTime;
 
 @end
