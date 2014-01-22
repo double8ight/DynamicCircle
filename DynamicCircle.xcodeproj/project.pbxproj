@@ -22,6 +22,10 @@
 		004B9D71188F53C900377026 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 004B9D6F188F53C900377026 /* InfoPlist.strings */; };
 		004B9D73188F53C900377026 /* DynamicCircleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B9D72188F53C900377026 /* DynamicCircleTests.m */; };
 		004B9D7E188F542F00377026 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B9D7D188F542F00377026 /* circle.png */; };
+		004B9D80188F864E00377026 /* mainImage_circles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 004B9D7F188F864E00377026 /* mainImage_circles.jpg */; };
+		004B9D83188F876600377026 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B9D82188F876600377026 /* GameViewController.m */; };
+		004B9D86188F8C4700377026 /* button-7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 004B9D85188F8C4700377026 /* button-7.mp3 */; };
+		004B9D89188F8D1000377026 /* EndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B9D88188F8D1000377026 /* EndViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,12 @@
 		004B9D70188F53C900377026 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		004B9D72188F53C900377026 /* DynamicCircleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynamicCircleTests.m; sourceTree = "<group>"; };
 		004B9D7D188F542F00377026 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
+		004B9D7F188F864E00377026 /* mainImage_circles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mainImage_circles.jpg; sourceTree = "<group>"; };
+		004B9D81188F876600377026 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		004B9D82188F876600377026 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		004B9D85188F8C4700377026 /* button-7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-7.mp3"; sourceTree = "<group>"; };
+		004B9D87188F8D1000377026 /* EndViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndViewController.h; sourceTree = "<group>"; };
+		004B9D88188F8D1000377026 /* EndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +124,7 @@
 		004B9D4D188F53C900377026 /* DynamicCircle */ = {
 			isa = PBXGroup;
 			children = (
+				004B9D84188F8C2C00377026 /* audio */,
 				004B9D7C188F541900377026 /* image */,
 				004B9D56188F53C900377026 /* AppDelegate.h */,
 				004B9D57188F53C900377026 /* AppDelegate.m */,
@@ -122,6 +133,10 @@
 				004B9D5D188F53C900377026 /* ViewController.m */,
 				004B9D5F188F53C900377026 /* Images.xcassets */,
 				004B9D4E188F53C900377026 /* Supporting Files */,
+				004B9D81188F876600377026 /* GameViewController.h */,
+				004B9D82188F876600377026 /* GameViewController.m */,
+				004B9D87188F8D1000377026 /* EndViewController.h */,
+				004B9D88188F8D1000377026 /* EndViewController.m */,
 			);
 			path = DynamicCircle;
 			sourceTree = "<group>";
@@ -158,9 +173,18 @@
 		004B9D7C188F541900377026 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				004B9D7F188F864E00377026 /* mainImage_circles.jpg */,
 				004B9D7D188F542F00377026 /* circle.png */,
 			);
 			name = image;
+			sourceTree = "<group>";
+		};
+		004B9D84188F8C2C00377026 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				004B9D85188F8C4700377026 /* button-7.mp3 */,
+			);
+			name = audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,7 +263,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004B9D86188F8C4700377026 /* button-7.mp3 in Resources */,
 				004B9D60188F53C900377026 /* Images.xcassets in Resources */,
+				004B9D80188F864E00377026 /* mainImage_circles.jpg in Resources */,
 				004B9D52188F53C900377026 /* InfoPlist.strings in Resources */,
 				004B9D5B188F53C900377026 /* Main.storyboard in Resources */,
 				004B9D7E188F542F00377026 /* circle.png in Resources */,
@@ -261,7 +287,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004B9D83188F876600377026 /* GameViewController.m in Sources */,
 				004B9D5E188F53C900377026 /* ViewController.m in Sources */,
+				004B9D89188F8D1000377026 /* EndViewController.m in Sources */,
 				004B9D58188F53C900377026 /* AppDelegate.m in Sources */,
 				004B9D54188F53C900377026 /* main.m in Sources */,
 			);
@@ -472,6 +500,7 @@
 				004B9D78188F53C900377026 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		004B9D79188F53C900377026 /* Build configuration list for PBXNativeTarget "DynamicCircleTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +509,7 @@
 				004B9D7B188F53C900377026 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
