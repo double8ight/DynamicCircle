@@ -29,6 +29,7 @@
 		004B9D8C188F9A9A00377026 /* jungle-run.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 004B9D8A188F9A9A00377026 /* jungle-run.mp3 */; };
 		004B9D8D188F9A9A00377026 /* midnight-ride.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 004B9D8B188F9A9A00377026 /* midnight-ride.mp3 */; };
 		004B9D8F188FA41F00377026 /* BGHappy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 004B9D8E188FA41F00377026 /* BGHappy.mp3 */; };
+		40C1D4AB1892A3D00028D9B1 /* DC.png in Resources */ = {isa = PBXBuildFile; fileRef = 40C1D4AA1892A3D00028D9B1 /* DC.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		004B9D8A188F9A9A00377026 /* jungle-run.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jungle-run.mp3"; sourceTree = "<group>"; };
 		004B9D8B188F9A9A00377026 /* midnight-ride.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "midnight-ride.mp3"; sourceTree = "<group>"; };
 		004B9D8E188FA41F00377026 /* BGHappy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BGHappy.mp3; sourceTree = "<group>"; };
+		40C1D4AA1892A3D00028D9B1 /* DC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DC.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 		004B9D4D188F53C900377026 /* DynamicCircle */ = {
 			isa = PBXGroup;
 			children = (
+				40C1D4AA1892A3D00028D9B1 /* DC.png */,
 				004B9D84188F8C2C00377026 /* audio */,
 				004B9D7C188F541900377026 /* image */,
 				004B9D56188F53C900377026 /* AppDelegate.h */,
@@ -272,6 +275,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40C1D4AB1892A3D00028D9B1 /* DC.png in Resources */,
 				004B9D86188F8C4700377026 /* button-7.mp3 in Resources */,
 				004B9D8C188F9A9A00377026 /* jungle-run.mp3 in Resources */,
 				004B9D8F188FA41F00377026 /* BGHappy.mp3 in Resources */,
